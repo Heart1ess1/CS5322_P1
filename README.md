@@ -1,1 +1,1 @@
-![Database Schema ERD](images/schema.png)
+![Database Schema ERD](schema.png)
