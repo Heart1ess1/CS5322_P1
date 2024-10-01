@@ -1,0 +1,86 @@
+Stores
+----
+StoreID number pk autoincrement
+StoreName varchar2(100)
+CreatedAt date
+
+Consumers
+----
+CustomerID number pk autoincrement
+Username varchar2(50) unique
+PasswordHash varchar2(255)
+FullName varchar2(100)
+Email varchar2(100)
+CreatedAt date
+
+PlatformAdmins
+----
+AdminID number pk autoincrement
+Username varchar2(50) unique 
+PasswordHash varchar2(255) 
+FullName varchar2(100)
+Email varchar2(100)
+CreatedAt date 
+
+PlatformAdminStores
+----
+AdminID number pk fk >- PlatformAdmins.AdminID
+StoreID number pk fk >- Stores.StoreID
+
+
+StoreStaff
+----
+StaffID number pk autoincrement
+Username varchar2(50) unique
+PasswordHash varchar2(255)
+FullName varchar2(100)
+Email varchar2(100)
+StoreID number fk >- Stores.StoreID
+Role varchar2(20)   # CHECK (Role IN ('Admin', 'CustomerService'))
+CreatedAt date 
+
+Products
+----
+ProductID number pk autoincrement
+StoreID number fk >- Stores.StoreID
+ProductName varchar2(100)
+Description varchar2(4000)
+Price number(10,2) 
+Quantity number 
+CreatedAt date 
+
+Orders
+----
+OrderID number pk autoincrement
+CustomerID number fk >- Consumers.CustomerID
+OrderDate date 
+TotalAmount number(10,2)
+Status varchar2(20)
+
+OrderItems
+----
+OrderItemID number pk autoincrement
+OrderID number fk >- Orders.OrderID
+ProductID number fk >- Products.ProductID
+Quantity number 
+UnitPrice number(10,2) 
+
+Payments
+----
+PaymentID number pk autoincrement
+OrderID number  fk >- Orders.OrderID
+PaymentDate date 
+Amount number(10,2) 
+PaymentMethod varchar2(50)
+Status varchar2(20) 
+
+CustomerMessages
+----
+MessageID number pk autoincrement
+StoreID number  fk >- Stores.StoreID
+SenderID number 
+ReceiverID number 
+SenderType varchar2(20)   # CHECK (SenderType IN ('Consumer', 'Staff'))
+ReceiverType varchar2(20)   # CHECK (ReceiverType IN ('Consumer', 'Staff'))
+MessageText varchar2(4000)
+SentAt date 
