@@ -6,7 +6,7 @@
 -- Replace "YourPassword" with the actual password for 'johndoe'
 
 -- Connect to the database as customer 'johndoe'
-CONNECT johndoe/"YourPassword";
+CONNECT johndoe/"Password";
 
 -- Verify that the customer context is properly set
 SELECT SYS_CONTEXT('customer_ctx', 'customer_id') AS customer_id FROM DUAL;
