@@ -36,8 +36,7 @@ BEGIN
         policy_name           => 'consumers_policy',
         function_schema       => 'SYSTEM',
         policy_function       => 'consumers_policy_fn',
-        statement_types       => 'SELECT, UPDATE',
-        sec_relevant_cols     => 'Username, PasswordHash'
+        statement_types       => 'SELECT, UPDATE'
     );
 END;
 /
