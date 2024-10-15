@@ -36,7 +36,7 @@ END;
 
 -- Create a trigger that fires after a user logs on to the database
 CREATE OR REPLACE TRIGGER SET_STORESTAFF_CTX_TRIG
-AFTER LOGON ON DATABASE
+AFTER LOGON ON SCHEMA
 BEGIN
     DBMS_SESSION.SET_IDENTIFIER('storestaff');
     -- Call the procedure to set the store staff context
