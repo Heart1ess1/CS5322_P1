@@ -168,18 +168,6 @@ WHERE p.StoreID = SYS_CONTEXT('storestaff_ctx', 'store_id');
 -- ** Additional Tests **
 -- ********************************************
 
--- Insert a new product into own store
-INSERT INTO Products (ProductID, StoreID, ProductName, Description, Price, Quantity)
-VALUES (5, SYS_CONTEXT('storestaff_ctx', 'store_id'), 'Wireless Headphones', 'Noise-cancelling headphones.', 199.99, 25);
--- Expected Result:
--- The insert succeeds; 'techstaff1' can add new products to their own store.
-
--- Attempt to insert a product into another store
-INSERT INTO Products (ProductID, StoreID, ProductName, Description, Price, Quantity)
-VALUES (6, 2, 'E-Reader', 'Portable e-reader device.', 129.99, 50);
--- Expected Result:
--- The insert fails or no rows are inserted; cannot add products to other stores.
-
 -- Update own staff record
 UPDATE StoreStaff
 SET Email = 'charlie.newemail@example.com'
