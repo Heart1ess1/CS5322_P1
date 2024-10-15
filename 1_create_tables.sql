@@ -119,3 +119,36 @@ CREATE TABLE CustomerMessages (
     CONSTRAINT fk_messages_store FOREIGN KEY (StoreID)
         REFERENCES Stores(StoreID)
 );
+
+-- Create public synonyms for each table
+
+-- Public synonym for Stores table
+CREATE PUBLIC SYNONYM Stores FOR SYSTEM.Stores;
+
+-- Public synonym for Consumers table
+CREATE PUBLIC SYNONYM Consumers FOR SYSTEM.Consumers;
+
+-- Public synonym for PlatformAdmins table
+CREATE PUBLIC SYNONYM PlatformAdmins FOR SYSTEM.PlatformAdmins;
+
+-- Public synonym for PlatformAdminStores table
+CREATE PUBLIC SYNONYM PlatformAdminStores FOR SYSTEM.PlatformAdminStores;
+
+-- Public synonym for StoreStaff table
+CREATE PUBLIC SYNONYM StoreStaff FOR SYSTEM.StoreStaff;
+
+-- Public synonym for Products table
+CREATE PUBLIC SYNONYM Products FOR SYSTEM.Products;
+
+-- Public synonym for Orders table
+CREATE PUBLIC SYNONYM Orders FOR SYSTEM.Orders;
+
+-- Public synonym for OrderItems table
+CREATE PUBLIC SYNONYM OrderItems FOR SYSTEM.OrderItems;
+
+-- Public synonym for Payments table
+CREATE PUBLIC SYNONYM Payments FOR SYSTEM.Payments;
+
+-- Public synonym for CustomerMessages table
+CREATE PUBLIC SYNONYM CustomerMessages FOR SYSTEM.CustomerMessages;
+
