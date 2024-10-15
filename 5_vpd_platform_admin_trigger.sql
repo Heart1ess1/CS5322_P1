@@ -22,6 +22,7 @@ CREATE OR REPLACE PACKAGE BODY PLATFORMADMIN_CTX_PKG IS
 
         -- Set admin_id in the platformadmin_ctx context
         DBMS_SESSION.SET_CONTEXT('platformadmin_ctx', 'admin_id', ADMIN_ID);
+        DBMS_SESSION.SET_IDENTIFIER('platformadmin');
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
             NULL; -- If no matching record is found, do nothing
@@ -34,7 +35,6 @@ END;
 CREATE OR REPLACE TRIGGER SET_PLATFORMADMIN_CTX_TRIG
 AFTER LOGON ON DATABASE
 BEGIN
-    DBMS_SESSION.SET_IDENTIFIER('platformadmin');
     -- Call the procedure to set the platform administrator context
     PLATFORMADMIN_CTX_PKG.SET_PLATFORMADMIN_CONTEXT;
 END;
