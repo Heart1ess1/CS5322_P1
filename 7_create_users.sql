@@ -19,8 +19,7 @@ CREATE ROLE platformadmin_role;
 GRANT CONNECT TO consumer_role;
 
 -- Consumers need to select and update their own data
-GRANT SELECT (Username, Fullname, Email, CREATEDAT) ON Consumers TO consumer_role;
-GRANT UPDATE (Email, Fullname) ON Consumers TO consumer_role;
+GRANT SELECT, UPDATE ON Consumers TO consumer_role;
 GRANT SELECT ON Products TO consumer_role;
 GRANT SELECT ON Stores TO consumer_role;
 GRANT SELECT ON Orders TO consumer_role;
@@ -38,7 +37,7 @@ GRANT SELECT, UPDATE ON Orders TO storestaff_role;
 GRANT SELECT, UPDATE ON OrderItems TO storestaff_role;
 GRANT SELECT, UPDATE ON Payments TO storestaff_role;
 GRANT SELECT, UPDATE ON CustomerMessages TO storestaff_role;
-GRANT SELECT (Fullname, Email) ON Consumers TO storestaff_role;
+GRANT SELECT ON Consumers TO storestaff_role;
 
 -- Grant privileges to platformadmin_role
 GRANT CONNECT TO platformadmin_role;
@@ -52,7 +51,7 @@ GRANT SELECT, UPDATE, DELETE ON Orders TO platformadmin_role;
 GRANT SELECT, UPDATE, DELETE ON OrderItems TO platformadmin_role;
 GRANT SELECT, UPDATE, DELETE ON Payments TO platformadmin_role;
 GRANT SELECT, UPDATE, DELETE ON CustomerMessages TO platformadmin_role;
-GRANT SELECT (Fullname, Email, CREATEDAT) ON Consumers TO platformadmin_role;
+GRANT SELECT ON Consumers TO platformadmin_role;
 
 -- Grant execute privileges on context packages
 GRANT EXECUTE ON CUSTOMER_CTX_PKG TO consumer_role;
