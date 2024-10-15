@@ -26,6 +26,7 @@ CREATE OR REPLACE PACKAGE BODY STORESTAFF_CTX_PKG IS
         DBMS_SESSION.SET_CONTEXT('storestaff_ctx', 'staff_id', STAFF_ID);
         DBMS_SESSION.SET_CONTEXT('storestaff_ctx', 'store_id', STORE_ID);
         DBMS_SESSION.SET_CONTEXT('storestaff_ctx', 'role', ROLE);
+        DBMS_SESSION.SET_IDENTIFIER('storestaff');
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
             NULL; -- If no matching record is found, do nothing
@@ -38,7 +39,6 @@ END;
 CREATE OR REPLACE TRIGGER SET_STORESTAFF_CTX_TRIG
 AFTER LOGON ON SCHEMA
 BEGIN
-    DBMS_SESSION.SET_IDENTIFIER('storestaff');
     -- Call the procedure to set the store staff context
     STORESTAFF_CTX_PKG.SET_STORESTAFF_CONTEXT;
 END;
