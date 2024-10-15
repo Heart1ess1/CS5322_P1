@@ -19,6 +19,15 @@ BEGIN
     RETURN pred;
 END;
 /
+-- Creating policy functions for DELETE operations
+CREATE OR REPLACE FUNCTION consumers_delete_policy_fn (
+    schema_p IN VARCHAR2,
+    table_p IN VARCHAR2
+) RETURN VARCHAR2 IS
+BEGIN
+    RETURN '1=0'; 
+END;
+/
 -- Apply the policy to the Consumers table
 BEGIN
     DBMS_RLS.ADD_POLICY(
@@ -27,8 +36,20 @@ BEGIN
         policy_name           => 'consumers_policy',
         function_schema       => 'SYSTEM',
         policy_function       => 'consumers_policy_fn',
-        statement_types       => 'SELECT, UPDATE, DELETE',
-        sec_relevant_cols     => 'Username, PasswordHash' -- Specify sensitive columns
+        statement_types       => 'SELECT, UPDATE',
+        sec_relevant_cols     => 'Username, PasswordHash'
+    );
+END;
+/
+-- 将策略应用于 Consumers 表的 DELETE 操作
+BEGIN
+    DBMS_RLS.ADD_POLICY(
+        object_schema         => 'SYSTEM',
+        object_name           => 'Consumers',
+        policy_name           => 'consumers_delete_policy',
+        function_schema       => 'SYSTEM',
+        policy_function       => 'consumers_delete_policy_fn',
+        statement_types       => 'DELETE'
     );
 END;
 /
