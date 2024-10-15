@@ -25,7 +25,7 @@ SELECT * FROM StoreStaff;
 -- Try to select other store staff's data
 SELECT * FROM StoreStaff WHERE StaffID <> SYS_CONTEXT('storestaff_ctx', 'staff_id');
 -- Expected Result:
--- No records are returned; VPD policy prevents access to other staff members' data.
+-- Only the record for Store 1 staffs.
 
 -- Access the Products table to view products from own store
 SELECT * FROM Products;
