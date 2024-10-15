@@ -1,3 +1,18 @@
+-- Delete all existing data
+DELETE FROM CustomerMessages;
+DELETE FROM Payments;
+DELETE FROM OrderItems;
+DELETE FROM Orders;
+DELETE FROM Products;
+DELETE FROM StoreStaff;
+DELETE FROM PlatformAdminStores;
+DELETE FROM PlatformAdmins;
+DELETE FROM Consumers;
+DELETE FROM Stores;
+
+-- Commit the changes
+COMMIT;
+
 -- Insert data into Stores table
 INSERT INTO Stores (StoreID, StoreName) VALUES (1, 'Tech Gadgets');
 INSERT INTO Stores (StoreID, StoreName) VALUES (2, 'Book Haven');
@@ -43,3 +58,6 @@ INSERT INTO CustomerMessages (MessageID, StoreID, SenderID, ReceiverID, SenderTy
 INSERT INTO CustomerMessages (MessageID, StoreID, SenderID, ReceiverID, SenderType, ReceiverType, MessageText) VALUES (2, 1, 1, 1, 'Staff', 'Consumer', 'Sure, how can I assist you?');
 INSERT INTO CustomerMessages (MessageID, StoreID, SenderID, ReceiverID, SenderType, ReceiverType, MessageText) VALUES (3, 2, 2, 2, 'Consumer', 'Staff', 'Is the notebook available in different colors?');
 INSERT INTO CustomerMessages (MessageID, StoreID, SenderID, ReceiverID, SenderType, ReceiverType, MessageText) VALUES (4, 2, 2, 2, 'Staff', 'Consumer', 'Yes, we have it in blue and black.');
+
+-- Commit the changes to make them persistent
+COMMIT;
