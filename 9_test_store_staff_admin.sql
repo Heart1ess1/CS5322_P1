@@ -30,13 +30,12 @@ SELECT * FROM StoreStaff WHERE StaffID <> SYS_CONTEXT('storestaff_ctx', 'staff_i
 -- Access the Products table to view products from own store
 SELECT * FROM Products;
 -- Expected Result:
--- Only products belonging to 'techstaff1's store (StoreID = 1) are displayed.
--- Products from other stores are not visible due to VPD policy.
+-- All users can read produces.
 
 -- Attempt to access products from another store
 SELECT * FROM Products WHERE StoreID <> SYS_CONTEXT('storestaff_ctx', 'store_id');
 -- Expected Result:
--- No records are returned; cannot access products from other stores.
+-- All users can read produces.
 
 -- Access the Orders table to view orders containing products from own store
 SELECT DISTINCT o.*
