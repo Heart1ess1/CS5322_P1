@@ -32,6 +32,7 @@ GRANT CONNECT TO storestaff_role;
 
 -- Store Staff need more extensive privileges on their store's data
 GRANT SELECT, UPDATE ON StoreStaff TO storestaff_role;
+GRANT SELECT, UPDATE ON Stores TO storestaff_role;
 GRANT SELECT, UPDATE ON Products TO storestaff_role;
 GRANT SELECT, UPDATE ON Orders TO storestaff_role;
 GRANT SELECT, UPDATE ON OrderItems TO storestaff_role;
