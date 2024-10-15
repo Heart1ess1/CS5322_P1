@@ -52,6 +52,7 @@ GRANT SELECT, UPDATE, DELETE ON Orders TO platformadmin_role;
 GRANT SELECT, UPDATE, DELETE ON OrderItems TO platformadmin_role;
 GRANT SELECT, UPDATE, DELETE ON Payments TO platformadmin_role;
 GRANT SELECT, UPDATE, DELETE ON CustomerMessages TO platformadmin_role;
+GRANT SELECT ON PlatformAdminStores TO platformadmin_role;
 GRANT SELECT ON Consumers TO platformadmin_role;
 
 -- Grant execute privileges on context packages
