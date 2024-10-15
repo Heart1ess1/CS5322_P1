@@ -17,12 +17,7 @@ CREATE ROLE platformadmin_role;
 
 -- Grant privileges to consumer_role
 GRANT CONNECT TO consumer_role;
- CustomerID    NUMBER PRIMARY KEY,
-    Username      VARCHAR2(50) UNIQUE NOT NULL,
-    PasswordHash  VARCHAR2(255) NOT NULL,  -- Stores the hashed password
-    FullName      VARCHAR2(100),
-    Email         VARCHAR2(100),
-    CreatedAt     DATE DEFAULT SYSDATE
+
 -- Consumers need to select and update their own data
 GRANT SELECT, UPDATE ON Consumers TO consumer_role;
 GRANT SELECT ON Products TO consumer_role;
