@@ -222,8 +222,8 @@ BEGIN
         -- Store staff can access messages related to their store
         pred := 'StoreID = SYS_CONTEXT(''storestaff_ctx'', ''store_id'')';
     ELSE
-        -- Other users cannot access any data
-        pred := '1=0';
+        -- platformAdmin can read all messages.
+        pred := '1=1';
     END IF;
     RETURN pred;
 END;
