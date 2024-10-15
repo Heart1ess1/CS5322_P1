@@ -68,15 +68,24 @@ BEGIN
             WHERE AdminID = SYS_CONTEXT(''platformadmin_ctx'', ''admin_id'')
         )';
     ELSIF SYS_CONTEXT('USERENV', 'CLIENT_IDENTIFIER') = 'storestaff' THEN
-        -- Store staff can only access their own information
-        pred := 'StaffID = SYS_CONTEXT(''storestaff_ctx'', ''staff_id'')';
+        -- Store staff: role-based access control
+        IF SYS_CONTEXT('storestaff_ctx', 'role') = 'Admin' THEN
+            -- Admin can access all staff in their store
+            pred := 'StoreID = SYS_CONTEXT(''storestaff_ctx'', ''store_id'')';
+        ELSIF SYS_CONTEXT('storestaff_ctx', 'role') = 'CustomerService' THEN
+            -- CustomerService can only access their own information
+            pred := 'StaffID = SYS_CONTEXT(''storestaff_ctx'', ''staff_id'')';
+        ELSE
+            -- If no valid role, deny access
+            pred := '1=0';
+        END IF;
     ELSE
         -- Other users cannot access any data
         pred := '1=0';
     END IF;
     RETURN pred;
 END;
-/
+
 -- Apply the policy to the StoreStaff table
 BEGIN
     DBMS_RLS.ADD_POLICY(
