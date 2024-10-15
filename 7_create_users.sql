@@ -102,14 +102,6 @@ GRANT platformadmin_role TO admin2;
 -- ** Additional Privileges and Grants  **
 -- ***************************************
 
--- Grant necessary privileges to execute context-setting triggers and packages
-GRANT EXECUTE ON SYS.DBMS_SESSION TO consumer_role;
-GRANT EXECUTE ON SYS.DBMS_SESSION TO storestaff_role;
-GRANT EXECUTE ON SYS.DBMS_SESSION TO platformadmin_role;
-
--- Grant read privilege on VPD policies (if necessary)
--- This may depend on your database configuration
-
 -- Grant execute on triggers if required
 -- Ensure users can use the AFTER LOGON trigger
 ALTER USER johndoe QUOTA UNLIMITED ON USERS;
