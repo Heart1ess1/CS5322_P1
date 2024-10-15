@@ -31,7 +31,7 @@ INSERT INTO PlatformAdminStores (AdminID, StoreID) VALUES (2, 2); -- Bob manages
 
 -- Insert data into StoreStaff table
 INSERT INTO StoreStaff (StaffID, Username, PasswordHash, FullName, Email, StoreID, Role) VALUES (1, 'techstaff1', 'staffpassword1', 'Charlie Brown', 'charlie@example.com', 1, 'Admin');
-INSERT INTO StoreStaff (StaffID, Username, PasswordHash, FullName, Email, StoreID, Role) VALUES (2, 'bookstaff1', 'staffpassword2', 'Dana White', 'dana@example.com', 2, 'CustomerService');
+INSERT INTO StoreStaff (StaffID, Username, PasswordHash, FullName, Email, StoreID, Role) VALUES (2, 'bookstaff1', 'staffpassword2', 'Dana White', 'dana@example.com', 1, 'CustomerService');
 
 -- Insert data into Products table
 INSERT INTO Products (ProductID, StoreID, ProductName, Description, Price, Quantity) VALUES (1, 1, 'Smartphone', 'Latest model smartphone with advanced features.', 699.99, 50);
