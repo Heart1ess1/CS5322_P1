@@ -67,11 +67,11 @@ GRANT EXECUTE ON PLATFORMADMIN_CTX_PKG TO platformadmin_role;
 -- ***************
 
 -- Create user account for John Doe (Consumer)
-CREATE USER johndoe IDENTIFIED BY "Password";
+CREATE USER johndoe IDENTIFIED BY Password;
 GRANT consumer_role TO johndoe;
 
 -- Create user account for Jane Smith (Consumer)
-CREATE USER janedoe IDENTIFIED BY "Password";
+CREATE USER janedoe IDENTIFIED BY Password;
 GRANT consumer_role TO janedoe;
 
 -- ***************
@@ -79,11 +79,11 @@ GRANT consumer_role TO janedoe;
 -- ***************
 
 -- Create user account for Charlie Brown (Store Staff)
-CREATE USER techstaff1 IDENTIFIED BY "Password";
+CREATE USER techstaff1 IDENTIFIED BY Password;
 GRANT storestaff_role TO techstaff1;
 
 -- Create user account for Dana White (Store Staff)
-CREATE USER bookstaff1 IDENTIFIED BY "Password";
+CREATE USER bookstaff1 IDENTIFIED BY Password;
 GRANT storestaff_role TO bookstaff1;
 
 -- ******************************
@@ -91,11 +91,11 @@ GRANT storestaff_role TO bookstaff1;
 -- ******************************
 
 -- Create user account for Alice Johnson (Platform Admin)
-CREATE USER admin1 IDENTIFIED BY "Password";
+CREATE USER admin1 IDENTIFIED BY Password;
 GRANT platformadmin_role TO admin1;
 
 -- Create user account for Bob Williams (Platform Admin)
-CREATE USER admin2 IDENTIFIED BY "Password";
+CREATE USER admin2 IDENTIFIED BY Password;
 GRANT platformadmin_role TO admin2;
 
 -- ***************************************
