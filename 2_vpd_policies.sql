@@ -85,6 +85,29 @@ BEGIN
     END IF;
     RETURN pred;
 END;
+/
+CREATE OR REPLACE FUNCTION storestaff_policy_update_fn (
+    schema_p IN VARCHAR2,
+    table_p IN VARCHAR2
+) RETURN VARCHAR2 IS
+    pred VARCHAR2(4000);
+BEGIN
+    -- Determine the predicate based on user identity
+    IF SYS_CONTEXT('USERENV', 'CLIENT_IDENTIFIER') = 'platformadmin' THEN
+        -- Platform admins can access staff of stores they manage
+        pred := 'StoreID IN (
+            SELECT StoreID FROM PlatformAdminStores
+            WHERE AdminID = SYS_CONTEXT(''platformadmin_ctx'', ''admin_id'')
+        )';
+    ELSIF SYS_CONTEXT('USERENV', 'CLIENT_IDENTIFIER') = 'storestaff' THEN
+        -- Store staff can only access their own information
+        pred := 'StaffID = SYS_CONTEXT(''storestaff_ctx'', ''staff_id'')';
+    ELSE
+        -- Other users cannot access any data
+        pred := '1=0';
+    END IF;
+    RETURN pred;
+END;
 
 -- Apply the policy to the StoreStaff table
 BEGIN
@@ -94,11 +117,22 @@ BEGIN
         policy_name           => 'storestaff_policy',
         function_schema       => 'SYSTEM',
         policy_function       => 'storestaff_policy_fn',
-        statement_types       => 'SELECT, UPDATE, DELETE'
+        statement_types       => 'SELECT'
     );
 END;
 /
 
+BEGIN
+    DBMS_RLS.ADD_POLICY(
+        object_schema         => 'SYSTEM',
+        object_name           => 'StoreStaff',
+        policy_name           => 'storestaff_policy_update',
+        function_schema       => 'SYSTEM',
+        policy_function       => 'storestaff_policy_update_fn',
+        statement_types       => 'UPDATE, DELETE'
+    );
+END;
+/
 -- 3. Create the policy function for the Products table
 CREATE OR REPLACE FUNCTION products_policy_fn (
     schema_p IN VARCHAR2,
