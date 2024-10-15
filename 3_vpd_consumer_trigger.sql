@@ -26,7 +26,7 @@ END;
 
 -- Create a trigger that fires after a user logs on to the database
 CREATE OR REPLACE TRIGGER SET_CUSTOMER_CTX_TRIG
-AFTER LOGON ON DATABASE
+AFTER LOGON ON SCHEMA
 BEGIN
     DBMS_SESSION.SET_IDENTIFIER('customer');
     -- Call the procedure to set the customer context
