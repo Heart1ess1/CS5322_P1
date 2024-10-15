@@ -346,7 +346,43 @@ BEGIN
 END;
 /
 
--- 8. Create the policy function for the PlatformAdminStores table
+-- 8. Create the policy function for the Stores table
+CREATE OR REPLACE FUNCTION stores_policy_fn (
+    schema_p IN VARCHAR2,
+    table_p IN VARCHAR2
+) RETURN VARCHAR2 IS
+    pred VARCHAR2(4000);
+BEGIN
+    -- Determine access based on user identity
+    IF SYS_CONTEXT('USERENV', 'CLIENT_IDENTIFIER') = 'storestaff' THEN
+        -- Store staff can update only their own store
+        pred := 'StoreID = SYS_CONTEXT(''storestaff_ctx'', ''store_id'')';
+    ELSIF SYS_CONTEXT('USERENV', 'CLIENT_IDENTIFIER') = 'platformadmin' THEN
+        -- Platform admins can update stores they manage
+        pred := 'StoreID IN (
+            SELECT StoreID FROM PlatformAdminStores
+            WHERE AdminID = SYS_CONTEXT(''platformadmin_ctx'', ''admin_id'')
+        )';
+    ELSE
+        -- Other users cannot access any data
+        pred := '1=0';
+    END IF;
+    RETURN pred;
+END;
+/
+-- Apply the policy to the Stores table
+BEGIN
+    DBMS_RLS.ADD_POLICY(
+        object_schema   => 'SYSTEM',
+        object_name     => 'Stores',
+        policy_name     => 'stores_policy',
+        function_schema => 'SYSTEM',
+        policy_function => 'stores_policy_fn',
+        statement_types => 'UPDATE' -- Apply only to UPDATE operations
+    );
+END;
+/
+-- 9. Create the policy function for the PlatformAdminStores table
 CREATE OR REPLACE FUNCTION platformadminstores_policy_fn (
     schema_p IN VARCHAR2,
     table_p IN VARCHAR2
@@ -376,7 +412,7 @@ BEGIN
 END;
 /
 
--- 9. Create the policy function for the Payments table
+-- 10. Create the policy function for the Payments table
 CREATE OR REPLACE FUNCTION payments_policy_fn (
     schema_p IN VARCHAR2,
     table_p IN VARCHAR2
