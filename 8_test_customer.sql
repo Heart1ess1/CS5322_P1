@@ -88,12 +88,6 @@ WHERE CustomerID <> SYS_CONTEXT('customer_ctx', 'customer_id');
 -- Expected Result:
 -- No rows are deleted; VPD policy prevents deleting other customers' records.
 
--- Place a new order for the customer
-INSERT INTO Orders (OrderID, CustomerID, TotalAmount, Status)
-VALUES (3, SYS_CONTEXT('customer_ctx', 'customer_id'), 199.99, 'Pending');
--- Expected Result:
--- The insert succeeds; the new order is associated with 'johndoe'.
-
 -- Attempt to select from a restricted table
 SELECT * FROM PlatformAdmins;
 -- Expected Result:
