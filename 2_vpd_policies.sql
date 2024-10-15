@@ -94,8 +94,7 @@ BEGIN
         policy_name           => 'storestaff_policy',
         function_schema       => 'SYSTEM',
         policy_function       => 'storestaff_policy_fn',
-        statement_types       => 'SELECT, UPDATE, DELETE',
-        sec_relevant_cols     => 'Username, PasswordHash' -- Specify sensitive columns
+        statement_types       => 'SELECT, UPDATE, DELETE'
     );
 END;
 /
@@ -264,8 +263,7 @@ BEGIN
         policy_name           => 'platformadmins_select_policy',
         function_schema       => 'SYSTEM',
         policy_function       => 'platformadmins_select_policy_fn',
-        statement_types       => 'SELECT',
-        sec_relevant_cols     => 'Username, PasswordHash' -- Specify sensitive columns
+        statement_types       => 'SELECT'
     );
 END;
 /
@@ -278,8 +276,7 @@ BEGIN
         policy_name           => 'platformadmins_update_policy',
         function_schema       => 'SYSTEM',
         policy_function       => 'platformadmins_update_policy_fn',
-        statement_types       => 'UPDATE',
-        sec_relevant_cols     => 'AdminID, Username, PasswordHash, CreatedAt'
+        statement_types       => 'UPDATE'
     );
 END;
 /
@@ -460,8 +457,7 @@ BEGIN
         policy_name           => 'payments_policy',
         function_schema       => 'SYSTEM',
         policy_function       => 'payments_policy_fn',
-        statement_types       => 'SELECT, UPDATE, DELETE',
-        sec_relevant_cols     => 'PaymentMethod' -- Specify sensitive columns
+        statement_types       => 'SELECT, UPDATE, DELETE'
     );
 END;
 /
