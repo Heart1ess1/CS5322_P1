@@ -40,7 +40,7 @@ BEGIN
     );
 END;
 /
--- 将策略应用于 Consumers 表的 DELETE 操作
+
 BEGIN
     DBMS_RLS.ADD_POLICY(
         object_schema         => 'SYSTEM',
